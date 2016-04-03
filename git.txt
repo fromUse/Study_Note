@@ -1,0 +1,60 @@
+#  GitNote
+
+#  git是一个版本公共平台。
+
+#  git可以实现本地与远程代码的共享与同步，实现多终端多平台，让你随时随地都可以继续你的开发zhilv
+
+#  git可以是个免费开源个人或者组织项目的代码，git可以解决以往开发过程中的版本控制问题
+
+#  git中以仓库[ Repositories ]为一个项目，即一个项目的整个开发过程的所有版本都将在Repositories进行管理
+
+
+#  用git首先去官网注册一个账户   url>>>https://github.com
+
+#  在注册后新建一个Repositories，名字根据实际需求去写。一般选择公共仓库,,,因为私有是付费，公开则免费
+
+#  在linux或者windows下 在自己存放项目的相关目录进入控制台 输入命令 git clone git@github.com:fromUse/Study_Note.git
+	# 命令执行后会自动把仓库的文件全部复制到当前目录
+
+
+### 在克隆仓库前先在本地配置好公钥key，和配置git的用户相关信息
+	# 生成key 命令ssh-keygen -t rsa -C "838437017@qq.com" [写自己的邮箱地址]
+	# git config --global  user.name "formUse"
+	# git config --global  user.email "838437017@qq.com"
+	
+	# 命令后面的 url 是你的仓库的对应地址，在仓库很容找到，直接复制过来就行了，建议用ssh 不要用 https	
+	# 如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，
+	# 这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。
+	# 第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+	# 然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
+	
+
+### 仓库的提交与同步
+#  当仓库已经克隆到了本地，就可以开始/继续你的开发之旅
+	# 当在本地仓库增加了内容，就用 命令 git add filename 
+	# filename 即你增加的文件的文件名，
+	# 当修改的文件过多时就直接用 git add .  [ git 会自动判断被你修改的文件 ]
+	# 然后提交 命令 git commit -m "版本描述"
+	# 当命令 不加-m 参数就打开一个编辑界面 强制你写版本描述
+	# 最后本地版本推送到git服务器[远程] 命令 git push origin branchName[分支名]
+
+### 仓库分支
+#  仓库是git很重要的概念。
+#  在git中分支就是 一个项目的开发 路线/轨迹 
+	# 例如在主分支 master 正在做一个项目，突然你想再添加一个新功能，但是又怕这个功能未必就好用，
+	# 所以就要用到git的分支 ，即在主分支的上开出一条新的 线路/轨迹 ,在新的分支上可以继续开发你的功能，但是不会影响到主分支的开发，
+	# 因为分支之间互补干扰，因为代码是独立的[ 公共的代码是一样的，自己独有的代码是独有的]
+	
+	＃ 当你觉得分支的功能不可行，你可以直接删除。
+	＃ 当在其他分支开发的功能你觉得可行的，那么你可以把本分支分代码合并到主分支上，
+
+＃# 分支用到的相关命令
+	# git branch -a [查看当前仓库的分支情况]
+	# git checkout branchName [切换分支]
+	# git branch -d branchName [ 删除分支]　 
+
+###  常用命令
+# git status [查看当前版本修改情况，包括是是自己修改了，还是落后于其他人修改后的最新版本]
+# git fetch origin branchName [从远程获取最新版本　到　本地branchaName分支上]
+# git pull origin branchName [合并远程最新的版本到分支上]
+# git merge branchName [branchName分支的内容到当前分支上]
