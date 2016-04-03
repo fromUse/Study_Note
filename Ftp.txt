@@ -1,0 +1,72 @@
+##FTP
+#		 文件传输协议
+
+##FTP端口
+# 21   [ 接受命令 ]
+#	20   [ 数据传输 ]
+
+
+##主动模式&&被动模式
+#主动模式
+	#客户端随机开一个 [ 大于1024 ] 的端口并与 服务器的FTP服务21端口连接
+	#客户端监听[ 上文随机开 的大于1024 的端口 ] 与服务器 FTP服务的连接状态
+	#服务器20端口 主动向客户端 [ 大于1024的端口 ]发送数据
+
+#被动模式
+	#客户端开两个端口 [ 都大于1024 ]
+	#第一个端口 与服务器21端口 进行通信
+	#客户端第二个端口主动向服务器进行数据请求， 服务器随机开一个端口[ 大于1024 ]响应客户端的请求
+
+
+##VSFTP
+#GPL协议的服务软件
+#非常安全
+#快熟 [ RedHat 单台服务器 < 理论 >支持15000个用户连接 ]
+
+
+##VSFTP安装
+# yum -y install vsftpd
+
+##服务启动 || 关闭
+# /etc/init.d/vshtpd start / stop / restart [ Linux通用 ]
+# services vsftpd start / stop / restart  [ RedHat Centos 等部分发行版 ]
+
+
+##设置开机启动 level 35
+# chkconfig --level 35 vsftpd on
+
+
+##配置文件
+# /etc/vsftpd/vsftpd.conf [ 住配置文件 ]
+#	/etc/vsftpd/ftpusers  [ 黑名单用户 被禁止访问的系统用户root  ]
+# /etc/vsftpd/user_list [ 默认是白名单模式 <主配置可以修改模式> ]
+	# userlist_deny=NO [ 白名单模式 ]
+	# userlist_deny=YES [ 黑名单模式 ]
+
+##FTP默认文件夹
+#		/var/ftp/... [ 匿名用户登录 ]
+
+
+##用户访问权限 [ 主配置文件 vsftpd.conf ]
+#  < 12行 > anonymous_enable=YES 		默认是YES [ 是否允许匿名用户登录 YES OR NO ]
+#  < 27行 > anon_upload_enable=YES 	默认是YES [ 匿名用户上传 YES OR NO ] [ 前提文件夹有w权限 ]
+#  < 15行 > write_enable=YES			  默认是YES [ 匿名用户写入文件 YES OR NO] [ 前提文件夹有w权限 ]
+#  < 30行 > anon_mkdir_write_enable=YES 默认是YES 但是注释了 [ 是否允许匿名用户创建文件夹 ]
+
+#  < 96行 > chroot_local_user=YES 									默认是YES 但是注释了 [ 是否允许用户切换目录 YES OR NO]
+#  < 97行 > chroot_list_enable=YES 									默认是YES 但是注释了 [ 是否允许列出目录 YES OR NO]
+#	 < 99行 > hroot_list_file=/etc/vsftpd/chroot_list 默认注释了 [ 当此行生效时 会配合96 97行，即只能 chroot_list 文件下的用户可以切换目录  ]
+
+
+##用户登录的默认目录
+# 默认是用户的ho me目录
+# 或者自定义目录 [ 在主配置文件加 local_root=/目录 ]
+
+
+##设置FTP传输 <上传 下载> 速度上限
+# local_max_rate=20000 [ 单位是字节 byte ]
+
+
+
+##设置连接数量上限
+#  max_per_ip=20 [ 主配置下  没有就自己加上去 max_per_ip=20  数量按照实际需求设定 ]

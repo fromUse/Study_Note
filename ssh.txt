@@ -1,0 +1,22 @@
+
+	[ 相关远程登录软件 Xshell、 PuTTY ]
+	[ 远程登录Linux系统，进行远程操作 ]
+
+##ssh是加密传输
+
+##安装忽略[ 系统默认已经安装 ]
+
+##服务默认启动
+	#/etc/init.d/sshd start [ 启动 ]   service sshd start [ 部分发行版支持命令 ]
+	#/etc/init.d/sshd stop [ 停止  ]   .........................................
+	#/etc/i nit.d/sshd restart [ 重启 ] .........................................
+
+##查看监听状态
+# netstat -tln | grep ssh
+
+##防护墙一定要把规则写好
+
+##远程复制文件
+# scp [ file_name ] ssh user_name@host:/direstory_name
+# 上文的意思是 scp 命令 把 [ file_name ] 复制 到 某个主机的某个Linux用户下的 某个目录下
+# 注意事项：谨慎操作 切勿把服务器文件给误操作 导致覆盖了重要文件

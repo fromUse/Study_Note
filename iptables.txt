@@ -1,0 +1,97 @@
+﻿
+
+	iptables -F [ 清理所有规则 ] [ F Fulsh缩写]
+
+	iptables -L  [ 列出防护墙的信息 ]
+	
+	service iptables save [ 保存规则 ]
+	iptables -save>/etc/sysconfig/iptables [效果一样]
+	
+		[ policy 政策、策略意思 ]
+		[ 注 ] :有多条规则时，第一条匹配成功后将不再往下匹配
+					  木有规则时，执行默认规则匹配
+		
+	  Chain INPUT (policy ACCEPT)  	[ 代表数据包进来时 ] 
+	  Chain FORWAED (policy ACCEPT) [ 代表数据包转发 ]
+	  Chain OUTPUT (policy AACEPT) 	[ 代表数据包出去时 ]
+	  
+	  iptable [-A / -I / -P -D ] [ INPUT / OUTPUT / FORWARD ] [-j / -s ] [ DROP / REJECT ] 
+	  
+	  [ -A ] 表示添加规则、[ add 添加 ]
+	  [ -I ] 表示插入规则、[ insert 插入 ]
+	  [ -P ] 表示设置默认规则 [ 不用加-j了 ]
+	  [ -D ] 表示删除规则 [ delete ]
+	  [ -F ] 表示清楚规则 [ Fulsh ]
+	  [ -L ] 表示列出所以规则 [ List ]
+	  
+	  [ INPUT ] 添加规则的类型，接受数据包的类型
+	  [ OUTPUT ] 添加规则的类型，回应数据包的类型
+	  [ FORWAED ]
+	  
+	  [ -j ]  表示处理进来的包
+	 	[ -s ]  表示来源，如某台客户端ip
+	 	[ --line--nubmer] 显示规则序号
+	 	[ -n ]  表示数字形式显示
+	 	[ --dport ] 表示服务器 目标服务进数据的端口	
+	 	[--sport ]  表示服务器 目标服务出数据的端口
+	 	[ -p ] 表示指定协议，如tcp、icmp
+	 	[ -i ] 表示进数据包网卡
+	 	[ -o ] 表示出数据包网卡
+	 	
+		[ ACCEPT ] 表示接受的意思
+		[ DROP ]   丢弃意思 不回应客户端 
+		[ REJECT ] 丢弃并回应客户端拒绝
+
+
+防火墙脚本
+		#/bin/bash
+		#定义变量，变量是环境变量下的iptables命令
+		IPT="/sbin/iptables"
+		
+		#引用变量用$符号
+		#清空所以规则
+		$IPT -F 
+		
+		#设置默认INPUT规则，丢弃所有数据包
+		$IPT -P INPUT DROP
+		
+		#设置默认FORWARD规则，丢弃所有数据包
+		$IPT -P FORWARD DROP
+		
+		#设置默认OUTPUT规则，拒绝出数据包
+		$IPT -P OUTPUT DROP
+		
+		
+		#设置127.0.0.1 [ 本机网卡lo ] 可以做任何操作
+		$IPT -A INPUT -i lo -j ACCEPT
+		$IPT -A OUTPUT -o lo -j ACCEPT
+		
+		
+		#设置INPUT icmp协议 [ ping ] 
+		$IPT -A INPUT -p icmp -j ACCEPT
+		
+		#设置INPUT 80端口 [ web ] ACCEPT
+		$IPT -A INPUT -p tcp --dport 80 -j ACCEPT
+		
+		#设置INPUT 22端口 [ SHELL ] ACCEPT
+		$IPT -A INPUT -p tcp --dport 22 -j ACCEPT
+		
+		#设置INPUT 21端口  [ FTP ]  ACCEPT
+		$IPT -A INPUT -p tcp --dport 21 -j ACCEPT
+		
+		
+		
+		#设置OUTPUT icmp协议[ ping ] 
+		$IPT -A OUTPUT -p icmp -j ACCEPT
+		
+		#设置OUTPUT 80端口 [ web ]  ACCEPT
+		$IPT -A OUTPUT -p tcp --sport 80 -j ACCEPT
+		
+		#设置OUTPUT 22端口 [ SHELL ] ACCEPT
+		$IPT -A OUTPUT -p tcp --sport 22 -j ACCEPT
+		
+		#设置OUTPUT 21端口 ACCEPT
+		$IPT -A OUTPUT -p tcp --sport 21 -j ACCEPT 
+
+		#service iptables save
+		#service iptables restart

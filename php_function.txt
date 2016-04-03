@@ -1,0 +1,35 @@
+# is_set() 判断某个变量是否存在 [ 1/true , false ]
+
+# un_set() 销毁某个已经存在的变量 [ 1/true, false ]
+
+# reset() 将数组的指针指向数组第一个元素
+
+# mt_rand(min,max); 随机生成一个min~max之间的整数 [ 范围包括负数 结果就会有负数 ]
+ 
+# is_int() ,is_integer() 判断某个变量是否是数字 或者 数字字符串 [ 1 /true, false ] 数字字符串不起用
+
+# is_flaot(),is_double() 判断某个变量是否是浮点数 [ 1/true,false ] 数字字符串不起用
+
+# is_string 判断变量是否是字符串 [ 1/true, false]
+
+# is_array() 判断某个变量是否是数组 [ 1/true, false ]
+
+# number_format(args,args)    格式化数字字符串 参数2:指定数值保留小数点后 的位数    例如 100000000 格式化:100,000,000  
+
+# min() 求最小值或 数值数组的最小值
+
+# max() 求最大值或 数值数组的最大值
+
+# round() 四舍五入  例如  10.88 最后结果11
+
+# floor() 舍去法取整  例如 10.88 最后结果10 
+
+# abs() 绝对值      例如 -6  最后结果 6
+
+# ceil() 进一取整法
+
+# print_r()  大印易于理解的信息 例如数组
+
+# array_unique($arr) 返回无重复值的新数组 [ 针对的是值,key除外 ]
+
+# array_flip($arr) 返回 调换key和value 的一个新数组

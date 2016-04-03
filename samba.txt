@@ -1,0 +1,54 @@
+﻿	Samba  安装与配置
+			
+			
+			安装命令
+			yum -y install samba
+			
+			启动服务
+			/etc/init.d/smb start
+			
+			
+			查看服务是否启动
+			ps -aux | grep smb
+			
+			
+			开机启动
+			chkconfig --level 35 smb on
+			
+			编辑
+			vim /etc/selinux/config
+			
+			---disabled
+			
+			关闭防火墙
+			iptables -F [ 临时规格 ]
+			
+			保存设置
+			services iptables save
+				
+			编辑smb配置文件
+			vim /etc/samba/smb.conf
+			101行 security = share（匿名）
+						security = user(用户登录)
+			
+			[share_dir_name]
+				path = ....（共享路径）
+				public = ..[ yes / on].(匿名登录)
+				writabled = ..[ yes / on]..（写）
+				read = ..[ yes / on]..（读）
+				browseable = ..[ yes / on]..
+				valid users = user_name（指定可以登录的用户）
+				valid（有效的）
+				
+				samba用户机制（登录共享目录时用）
+				设置密码
+				smbpasswd -a user_name
+				
+				[homes]下修改创建 文件||文件夹 的默认权限
+				create mode = ...如777
+				directory mode = .....755
+				
+				
+				
+				权限1777 >>rwx-rwx-rwt  其中t代表只能修改用户自己的文件
+					  1770 >>rwx-rwx---T 其他用户不能读（查看）这个文件

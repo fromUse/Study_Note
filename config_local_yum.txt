@@ -1,0 +1,30 @@
+
+##在Centos下配置本地源
+
+
+## 源的配置文件
+ # 目录/etv/yum.repos.d
+ 1 [GuangPan]
+2 name=CentOS-$releasever - Media #自定义名称
+3 baseurl=file:///mnt/cdrom/ #本地光盘挂载路径
+4 gpgcheck=0 #检查GPG-KEY，0为不检查，1为检查
+5 enabled=1 #启用yum源，0为不启用，1为启用
+
+
+  		mkdir /mnt/cdrom   #新建挂载目录
+      mount /dev/cdrom  /mnt/cdrom #挂载光盘到/mnt/cdrom目录下
+      cd  /mnt/cdrom #进入挂载目录
+      ls   #查看挂载目录，光盘挂载成功 如下图：
+
+1 yum clean all   #清除yum缓存
+2 yum install php   #安装php
+      注意：CentOS需要将/etc/yum.rpos. d/目录下的CentOS-Base.repo  CentOS-Debuginfo.repo文件进行改名，这样就可以绕过网络进行本地源的安装。
+      具体命令如下：
+
+1 cd /etc/yum.repos.d/
+2 mv CentOS-Base.repo CentOS-Base.repo123
+3 mv CentOS-Debuginfo.repo CentOS-Debuginfo.repo123
+      测试本地源的指定是否成功。
+
+1 yum install php
+ 

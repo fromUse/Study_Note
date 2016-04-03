@@ -1,0 +1,43 @@
+﻿
+##系统启动级别
+# 开机启动会加载文件 /etc/inittab
+# 0 [ 关机 ]
+# 1 [ 单用户模式 ]
+# 2 [ 不带网络的多用户模式 ]
+# 3 [ 带网络的多用户模式 命令行界面 ]
+# 4 [  ]
+# 5 [ 带网络的多用户模式 图形界面 ]
+# 6 [ 重启 ]
+
+## chkconfig --level [ level 123456 ] [ server_name ] [ on / off ] 的本质
+# 当某个服务被设置了某某级别启动，其实就是在相应的等级文件的 服务脚本名称 前缀加S
+# 当某个服务被设置了某某级别关闭，其实就是在相应的等级文件的 服务脚本名称 S改成K
+			# 例如 chkconfig --level 35 mysqld on
+					# 那么就在是 级别为3 [ rc3.d ] 的文件目录下的mysqld 改成S36mysqld
+					# 那么就在是 级别为5 [ rc5.d ] 的文件目录下的mysqld 改成S36mysqld
+			# 例如 chkconfig --level 35 mysqld off
+					# 那么就在是 级别为3 [ rc3.d ] 的文件目录下的mysqld 改成K36mysqld
+					# 那么就在是 级别为5 [ rc5.d ] 的文件目录下的mysqld 改成K36mysqld
+
+# 当机器启动时就会将启动级别文件夹下的以S开头的所有服务
+# 当加载完 启动级别的所有服务后 紧接就会执行 /etc/rc.local->/etc/rc.d/rc.local 这个脚本
+		# [ 脚本里面你可以写一些你想要的开机启动 执行的脚本或者命令 ]
+
+## rc0.d -> rc.d/rc0.d  相当于 /etc/rc0.d == /etc/rc.d/rc0.d
+## rc1.d -> rc.d/rc1.d  相当于 /etc/rc1.d == /etc/rc.d/rc1.d
+## rc2.d -> rc.d/rc2.d  相当于 /etc/rc2.d == /etc/rc.d/rc2.d
+## rc3.d -> rc.d/rc3.d  相当于 /etc/rc3.d == /etc/rc.d/rc3.d
+## rc4.d -> rc.d/rc4.d  相当于 /etc/rc4.d == /etc/rc.d/rc4.d
+## rc5.d -> rc.d/rc5.d  相当于 /etc/rc5.d == /etc/rc.d/rc5.d
+## rc6.d -> rc.d/rc6.d  相当于 /etc/rc6.d == /etc/rc.d/rc6.d
+# 可以看出 6个级别 的文件都是软链接到 [ /etc/rc.d ] 这个目录下的对应文件
+# 每个 启动级别文件 下都包含了要启动的服务的文件
+# 每个启动服务文件又软链接到了 /etc/init.d 目录下
+
+
+# 在 /etc/ 目录下
+## init.d -> rc.d/init.d
+# 可以看出 init.d 其实是软链接到 [ /etc/rc.d/ ] 目录下的init.d
+# 相当于 /etc/init.d  ==  /etc/rc.d/init.d [ 因为不同发行版会有目录上的区别，所以就用软链接来规范化 ]
+
+

@@ -1,0 +1,17 @@
+﻿  [ Rewrite 规则 ] 
+  						实现伪静态 
+  						防盗链接
+  Rewrite规则在配置文件 [ /etc/httpd/conf/httpd.conf ]
+  				
+  在虚拟主机里面开启Rewrite	
+  				< VirtualHost *:80>
+						ServerAdmin [ 管理员邮箱 ]
+						DoccumentRoot /www/docs/......  [ 网站文件目录 ]
+						ServerName [ 服务器名称 ] [ 你想要设置的域名 ] 
+						ErrorLog /logs/.....[ 错误日志文件目录 ]
+						CustomLog logs/........[ 自定义日志文件的文件目录 ]
+						RewriteEngine On [ 开启Rewrite ]
+						RewriteRule [ 正则表达式 ]	 本机ip/某个文件夹				
+						#新配出的虚拟主机的参数配置可以和httpd.conf相当
+				</VirtualHost >
+

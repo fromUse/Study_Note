@@ -1,0 +1,44 @@
+0x01 Linux 安装准备
+    1、Linux for ubuntu-gnome 15.04 镜像下载：
+    	镜像 iso:http://cdimage.ubuntu.com/ubuntu-gnome/releases/15.04/release/ubuntu-gnome-15.04-desktop-amd64.iso
+	种子 Torrent:http://cdimage.ubuntu.com/ubuntu-gnome/releases/15.04/release/ubuntu-gnome-15.04-desktop-amd64.iso.torrent
+    2、Live_CD制作工具：PowerISO，搜一下就有，具体用法搜一下，实在不清楚群里问
+    
+0x02 Linux 安装
+    1、Linux 必须挂载的四个目录：
+	（1）/：根目录，一般30G
+	（2）boot：引导目录，一般500MB
+	（3）swap：交换分区，一般4~8GB
+	（4）home：家目录，用户数据目录，剩余所有可用空间都分配给它
+    2、安装完毕之后：
+	（1）sudo apt-get update：更新软件列表
+	（2）sudo apt-get upgrade：更新所有需要更新的软件
+	
+0x03 翻墙
+    1、本地hosts修改：
+	（1）laod.cn网站下载hosts文件到本地：http://laod.cn/hosts/2015-google-hosts.html
+	（2）用cd命令到/etc目录下，再执行sudo gedit hosts，把下载的hosts内容复制到这个文件里面，然后保存退出
+    2、Nydus：
+	step 1：到http://www.nydusproxy.com，登陆名cohbird.zn@gmail.com，密码tooyoungsimple7811
+	step 2：到服务器列表里随便选一个代理IP（不可用就换）
+	step 3：15.04默认有pptp协议VPN，所以在setting->network里面，“+”号添加新的连接方式，选择VPN->Point to Point方式，gateway填代理IP，用户名密码同上，advance里去勾EAP，勾选security
+	step 4：开启之测试是否连接成功，不行就换一个代理IP
+
+0x04 Linux基础命令：
+    1、常用命令：https://github.com/cohbird/UbuntuSpace/blob/master/Notebook/About_Linux/Common_Comands.txt
+    2、磁盘操作命令：https://github.com/cohbird/UbuntuSpace/blob/master/Notebook/About_Linux/Disk_Operation.txt
+    3、用户操作命令：https://github.com/cohbird/UbuntuSpace/blob/master/Notebook/About_Linux/User_Commands.txt
+
+0x05 Vim编辑器：
+    1、vim教程：http://blog.sina.com.cn/s/blog_c977576e0101i9iv.html
+    2、vim快捷键位图，搜一下就有		
+
+0x06 虚拟机
+    1、virtualBox for linux，搜一下在windows下好安装包，注，安装包不是*.exe，是*.deb
+    2、linux下的安装*.deb命令为：sudo dpkg -i *.deb
+    3、一个windows镜像，随便什么都可以只是为了天翼客户端，推荐xp
+    4、虚拟机网络连接模式为桥接（Bridger），这样才可以分配进内网使用客户端
+
+0x07 麦子学院C语言语法教程过一遍：http://www.maiziedu.com/course/qrsqd/2-810/
+
+以上，有问题群里谈论。

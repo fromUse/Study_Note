@@ -1,0 +1,38 @@
+
+## dhcp [ 全拼 Dynamic Host Configuration Protocol ] [ 动态主机配置协议 ]
+## 主要用于局域网 给多个客户端动态分配ip
+## 原理:白话地说就是四次握手
+## DHCP服务端口 ipv4:udp67 || ipv4:udp68
+
+
+## dhcp安装
+# yum -y install dhcp
+
+## 服务的启动 &&　关闭
+# /etc/init.d/dhcpd [ start / stop / restart ] [ 通用 ]
+#　service dhcpd  [ start / stop / restart ] [ 部分发行版 ]
+
+
+## 配置文件  [ 服务器端 ]
+# /etc/dhcp/dhcpd.conf
+# option domain-name "8.8.8.8";        [ 主DNS服务器 ]
+# option domain-name-server 8.8.8.8;   [ 副DNS服务器 多个ip用 ‘,’ 分开]
+# defaul-lease-time 600;    [ 默认租约时间  可以根据需求设置大小 ]
+# max-leases-time 7200;    [ 最大租约时间 可以根据需求设置大小 ]
+# option routers [ 网关ip  如 192.168.4.1]
+# option broadcast-address [ 广播地址  网段的最后一个ip 如192.168.4.255 ]
+# subnet [ 你想要分配的ip网段 ] network [ 255.255.255.0 子网掩码 ]
+# range [ ip的起始ip 如192.168.4.50 ]  [ ip的结束ip 如192.168.4.200 ]
+
+
+##模板文件
+# /usr/share/doc/dhcp-4.1.1/dhcp.conf.sample
+
+
+##服务器端查看谁获取了ip
+# cat /var/lib/dhcpd/dhcpd.leases
+
+
+
+## Linux查看dhcp服务器 [ 客户端 ]
+# cat /var/lib/dhcplient-eth0.leases

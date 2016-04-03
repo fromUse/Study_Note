@@ -1,0 +1,84 @@
+﻿
+	Apache是一个组织！旗下有非常大项目
+	
+	Apache服务器 ：web服务端程序
+								 一般在Linux运行
+								 类似还有Windows下的IIS
+								 [ 不眠不休的程序 ]
+								 [ 装满httpd补丁的web服务 ]
+							
+	安装httpd  & 卸载httpd
+					yum -y install httpd httpd-devel
+					yum -y erase httpd httpd-devel
+	
+	启动服务 & 关闭服务
+					apachectl start
+					apachectl stop
+					
+					/ect/init.d/httpd satrt
+					/etc/init.d/httpd stop
+					
+					service httpd start
+					service httpd stop
+	
+	开机启动
+				chkconfig --level 35 httpd on
+				
+	配置文件配置
+				/etc/httpd/conf/httpd.conf
+				/etc/httpd/conf.d/
+				
+	httpd.conf
+				< 44 > 行设置是否显示主机名称/系统版本 [ ServerTokens OS / Minor  ]
+				< 536 > 行设置是否显示服务器版本	[ ServerSignature ON / Off  ]
+				< 262 > 设置管理员邮箱联系方式  [ ServerAdmin <邮箱>]
+				< 70 > 行设置访问超时时间  [ Timeout 60]
+				< 76 > 行设置是否开启持久连接  [ KeepAlive Off / On ]
+				< 58 > 行命令行前不加 / 时 默认是以 /etc/httpd 打头  [ ServerRoot "/etc/httpd" ]
+				< 65 > 行进程id文件 [ PidFile run/httpd.pid ]  相当于 /etc/httpd/run/httpd.pid
+				< 83 > 行设置一次最多多少量连接  [ MaxKeepAliveRequests 100 ] 具体多少看项目需求与硬件等客观因素
+				< 89 > 行设置时间超过15秒不操作就断开连接  [ KeepAliveTimeout 15 ]
+				< 136 > 行设置网站的端口号 [ Listen 80 ] 默认80 可以自定义
+				< 277 > 行设置服务器名称 [ ServerNmae localhost < 域名 > ] 一般虚拟机使用
+				< 292 > 行设置网站的根目录 [ "/var/www/html" ]
+				
+				< 303 >		< Directory/>
+										Options FollowSymlinks [ 是否允许在 跟目录 创建软连接 ]
+										AllowOverride None		 [ ]
+				< 306 >		</Directory > 
+				
+				< 304 > 对应302行的  Options [ -Indexes / Indexes ] [ -FollowSymlinks / FollowSymlinks ] 加“ - ”表示失效
+							 [ Indexes ] 表示是否隐藏网站目录结构
+							 
+				< 344 > 是否允许访问网站 Order [ allow / deny] 分别代表允许、禁止   < 两者顺序影响下面的执行 >
+				< 345 > 允许从所有来源  Allow from all  
+				< 402 > 网站默认首页文件 [ DirectoryIndex Index.html / index.html.var ]
+				< 365 > 是否允许访问user的home目录  [ UserDir disabled ] 默认关闭
+				< 373 > 是否允许访问home目录下的public_html [ UserDir public_html ] 很少开放
+				< 一旦修改配置文件必须重启服务 >
+				
+				
+				[ 网站默认目录 ] : /var/www/html/
+				[ 记录访问log ]  : /etc/httpd/logs ->/var/log/httpd
+				[ 直接进入var ]  : /var/log/httpd/
+													access_log [ 正常读取记录 ]
+													error——log [ 错误日志 ]
+													
+				apache 配置虚拟机 /etc/httpd/conf/httpd.conf
+					
+				进入/etc/httpd/conf.d/
+					
+				创建文件 : [ virtual.conf ]
+				< VirtualHost *:80>
+						ServerAdmin [ 管理员邮箱 ]
+						DoccumentRoot /www/docs/......  [ 网站文件目录 ]
+						ServerName [ 服务器名称 ] [ 你想要设置的域名 ] 
+						ErrorLog /logs/.....[ 错误日志文件目录 ]
+						CustomLog logs/........[ 自定义日志文件的文件目录 ]
+						#新配出的虚拟主机的参数配置可以和httpd.conf相当
+				</VirtualHost >
+				
+				[ 注 ] : 当Apache设有多台虚拟机时
+								需要在配置文件 < httpd.conf > 第 991 行 把 #NameVirtualHost *:80  注释去掉"#"
+								
+								
