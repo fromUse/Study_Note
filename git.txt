@@ -54,7 +54,17 @@
 	# git branch -d branchName [ 删除分支]　 
 
 ###  常用命令
+# git clone git@github.com:fromUse/Study_Note.git [从远程克隆仓库到本地]
 # git status [查看当前版本修改情况，包括是是自己修改了，还是落后于其他人修改后的最新版本]
 # git fetch origin branchName [从远程获取最新版本　到　本地branchaName分支上]
 # git pull origin branchName [合并远程最新的版本到分支上]
 # git merge branchName [branchName分支的内容到当前分支上]
+
+
+# git log [查看提交日志]
+# git reflog [查看提交日志]
+# git reset [versionID] [回滚但指定的版本]
+
+# git branch -d branchName [删除本地某分支]
+
+# git push origin --delete <branchName> [远程删除git上的某分支]
