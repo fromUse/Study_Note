@@ -1,4 +1,4 @@
-#  GitNote
+#   GitNote
 
 #  git是一个版本公共平台。
 
