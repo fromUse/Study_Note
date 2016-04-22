@@ -28,9 +28,34 @@ disable.android.first.run=true
 大连东软信息学院镜像服务器地址:
 mirrors.neusoft.edu.cn 端口：80
 
+genymotion缺少的库
+sudo apt-get install libgstreamer0.10-dev   libgstreamer-plugins-base0.10-dev
+
 安装LAMP
 sudo apt-get install apache2 php5 mysql-server php5-mysql
 
+---------------------------------------------------------------------------------------------------------------------------------------
+将应用的快捷方式（带图标）添加到桌面
+在目录 /usr/share/applications
+sudo vim xxx.desktop 文件
+编辑内容
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=AnrdoidStudio
+Icon=/media/chen-gui/Office/Linux/opt/android-studio/bin/studio.png
+Exec="/media/chen-gui/Office/Linux/opt/android-studio/bin/studio.sh" %f
+Comment=Develop with pleasure!
+Categories=Development;IDE;
+Terminal=false
+Icon替换对用的应用的图标
+Exec替换对用的应用的启动脚本
+
+命令行超级用户打开目录
+sudo nautilus /usr/share/applications
+把图标拖到桌面
+
+---------------------------------------------------------------------------------------------------------------------------------------
 安装Vbox下载链接:
 sudo sh -c "echo 'deb http://download.virtualbox.org/virtualbox/debian '$(lsb_release -cs)' contrib non-free' > /etc/apt/sources.list.d/virtualbox.list" && wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add - && sudo apt-get update && sudo apt-get install virtualbox-5.0
 
