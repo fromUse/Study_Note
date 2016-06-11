@@ -4,13 +4,13 @@ https://wiki.ubuntu.com/UbuntuGNOME/GetUbuntuGNOME/Non-LTS
 
 sudo apt-get --add-architecture i386 [ 判断系统是否开启了i386支持 ]
 sudo apt-get update [ 自动更新系统所有可以更新的软件 ]
-sudo apt-get dist-upgrade [ 检查系统库并更新到最新版本 ] 
+sudo apt-get dist-upgrade [ 检查系统库并更新到最新版本 ]
 sudo apt-get install lib32z1 lib32ncurses5 lib32stdc++6-4.8-dbg [ 安装32位支持库 ]
 
 JDK环境变量的配置 [ 不需要安装,直接把包解压就好 ]
 sudo nano /etc/profile [ /etc/profile 这是Linux一个系统配置文件,用来些环境变量路径 ]
 
-JAVA_HOME=/home/chen-gui/opt/jdk1.8 [ 此处些你的JDK安装目录 ]
+JAVA_HOME=/home/chen-gui/opt/jdk1.8 [ 此处写你的JDK安装目录 ]
 CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar [ 这里直接复制就行 ]
 PATH=.:$JAVA_HOME/bin:$PATH [ 直接复制 ]
 
@@ -23,15 +23,18 @@ PHPStrom
 http://idea.qinxi1992.cn/
 
 androidStudio
+关闭启动检测sdk
 disable.android.first.run=true
 
 大连东软信息学院镜像服务器地址:
+国内SDK服务器代理
 mirrors.neusoft.edu.cn 端口：80
 
 genymotion缺少的库
 sudo apt-get install libgstreamer0.10-dev   libgstreamer-plugins-base0.10-dev
 
 安装LAMP
+集成安装 Linux Apache2 MySQL PHP
 sudo apt-get install apache2 php5 mysql-server php5-mysql
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -56,15 +59,15 @@ sudo nautilus /usr/share/applications
 把图标拖到桌面
 
 ---------------------------------------------------------------------------------------------------------------------------------------
-安装Vbox下载链接:
-sudo sh -c "echo 'deb http://download.virtualbox.org/virtualbox/debian '$(lsb_release -cs)' contrib non-free' > /etc/apt/sources.list.d/virtualbox.list" && wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add - && sudo apt-get update && sudo apt-get install virtualbox-5.0
 
-
+图像化界面管理Ubuntu系统服务的开启启动等级
+sudo apt-get install sysv-rc-conf
+配置
+sudo sysv-rc-conf
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 有关Linux下安装与卸载软件的命令:
-.DEB
 
 Ubuntu系统中，软件通常以“deb”格式的包文件发布，它是一种预编译软件包。deb包中除了包含已编译的软件，通常还包括软件的拷贝路 径、对其它软件包的依赖关系纪录、一个比较通用的配置文件以及软件的描述、版本、作者、类别、占用空间等信息。
 
@@ -76,12 +79,12 @@ soft为软件包名称，ver为软件版本号，rev为Ubuntu修订版本号，a
 
 ==安装与卸载:
 
-dpkg -i | --install xxx.deb 安装deb软件包 
-dpkg -r | --remove xxx.deb 删除软件包 
-dpkg -r -P | --purge xxx.deb 连同配置文件一起删除 
-dpkg -I | -info xxx.deb 查看软件包信息 
-dpkg -L xxx.deb 查看文件拷贝详情 
-dpkg -l 查看系统中已安装软件包信息 
+dpkg -i | --install xxx.deb 安装deb软件包
+dpkg -r | --remove xxx.deb 删除软件包
+dpkg -r -P | --purge xxx.deb 连同配置文件一起删除
+dpkg -I | -info xxx.deb 查看软件包信息
+dpkg -L xxx.deb 查看文件拷贝详情
+dpkg -l 查看系统中已安装软件包信息
 dpkg-reconfigure xxx 重新配置软件包
 
 　有些时候，您使用“dpkg”安装一个软件包，系统会提示您该软件包依赖其它软件包。这时，您先安装其它软件包，直到满足依赖关系为止。或者同 时安装多个软件包 ，如：
@@ -102,11 +105,11 @@ apt-get remove xxx  #卸载xxx
 
 apt-get remove –purge xxx #卸载xxx同时删除配置文件
 
-apt-get update   #更新软件信息数据库 
+apt-get update   #更新软件信息数据库
 
-apt-get upgrade   #进行系统升级 
+apt-get upgrade   #进行系统升级
 
-apt-cache search   #搜索软件包 
+apt-cache search   #搜索软件包
 
 Tips：建议经常使用“apt-get update”命令来更新您的软件信息数据库
 
@@ -119,7 +122,7 @@ Tips：建议经常使用“apt-get update”命令来更新您的软件信息�
 
 ==安装:
 
-Red Hat： 这种软件包就像windows的EXE安装文件一样，各种文件已经编译好，并打了包，哪个文件该放到哪个文件夹，都指定好了，安装非常方便，在图形界面里你只需要双击就能自动安装。 
+Red Hat： 这种软件包就像windows的EXE安装文件一样，各种文件已经编译好，并打了包，哪个文件该放到哪个文件夹，都指定好了，安装非常方便，在图形界面里你只需要双击就能自动安装。
 
 Ubuntu：的软件包格式是deb ，如果要安装rpm 的包，则要先用alien 把rpm转换成deb.
 
@@ -129,16 +132,16 @@ Ubuntu：的软件包格式是deb ，如果要安装rpm 的包，则要先用ali
 
     sudo dpkg -i xxxx.deb # 安装
 
-==卸载: 
-Red Hat：1、打开一个SHELL终端 
-　　　　　2、因为LINUX下的软件名都包括版本号，所以卸载前最好先确定这个软件的完整名称。 
+==卸载:
+Red Hat：1、打开一个SHELL终端
+　　　　　2、因为LINUX下的软件名都包括版本号，所以卸载前最好先确定这个软件的完整名称。
 　　　　  查找RPM包软件：rpm -qa ×××* 　　
-　　　　  注意：×××指软件名称开头的几个字母，不要求写全，但别错，*就是通配符号“*”，即星号，如你想查找机子里安装的REALPLAYER软件，可以输入：rpm -qa realplay* 
-　　　　  3、找到软件后，显示出来的是软件完整名称，如firefox-1.0.1-1.3.2 
-   　　　   执行卸载命令：rpm -e firefox-1.0.1-1.3.2 
+　　　　  注意：×××指软件名称开头的几个字母，不要求写全，但别错，*就是通配符号“*”，即星号，如你想查找机子里安装的REALPLAYER软件，可以输入：rpm -qa realplay*
+　　　　  3、找到软件后，显示出来的是软件完整名称，如firefox-1.0.1-1.3.2
+   　　　   执行卸载命令：rpm -e firefox-1.0.1-1.3.2
 
 Ubuntu：sudo dpkg -r package_name
-===安装目录，执行命令查找：rpm -ql firefox-1.0.1-1.3.2 
+===安装目录，执行命令查找：rpm -ql firefox-1.0.1-1.3.2
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -146,60 +149,60 @@ Ubuntu：sudo dpkg -r package_name
 
 这种软件包里面都是源程序，没有编译过，需要编译后才能安装。
 
-==安装: 
+==安装:
 
      1  先解压并切换到该文件夹
 
-　　  tar -zxvf ****.tar.gz 
-　　  tar -jxvf ****.tar.bz(或bz2) 
+　　  tar -zxvf ****.tar.gz
+　　  tar -jxvf ****.tar.bz(或bz2)
 
      2  ./configure  ＃配置＃
 
-     3  make＃调用make＃ 
+     3  make＃调用make＃
 
      4  make install ＃安装源代码＃
 
      5  make clean 删除安装时产生的临时文件
 
-==卸载: 
+==卸载:
 
-1、进入安装时的目录 
+1、进入安装时的目录
 2、make uninstall  ＃卸载＃
-注意：make install命令过程中的安装目录，或者阅读安装目录里面的readme文件，当然最好的办法是在安装的过程中指定安装目录，即在./configure命令后面加参数--prefix=/**， 
+注意：make install命令过程中的安装目录，或者阅读安装目录里面的readme文件，当然最好的办法是在安装的过程中指定安装目录，即在./configure命令后面加参数--prefix=/**，
 如：./configure --prefix=/usr/local/aaaa，即把软件装在/usr/local/路径的aaaa这个目录里。一般的软件的默认安装目录在/usr/local或者/opt里，可以到那里去找找 。
 
-指定软件安装目录以后，当我们不需要这个软件时，直接删除软件的目录就行了。 
+指定软件安装目录以后，当我们不需要这个软件时，直接删除软件的目录就行了。
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 .bin
-以bin结尾的安装包，这种包类似于RPM包，安装也比较简单 
+以bin结尾的安装包，这种包类似于RPM包，安装也比较简单
 
  ==安装
-1、源代码压缩包所在的目录 
-2、给文件加上可执行属性：chmod +x ******.bin（中间是字母x，小写） 
-3、执行命令：./******.bin(realplayer for linux就是这样的安装包) 
-==卸载：把安装时中选择的安装目录删除就OK 
-===执行安装过程中可以指定，类似于windows下安装。 
+1、源代码压缩包所在的目录
+2、给文件加上可执行属性：chmod +x ******.bin（中间是字母x，小写）
+3、执行命令：./******.bin(realplayer for linux就是这样的安装包)
+==卸载：把安装时中选择的安装目录删除就OK
+===执行安装过程中可以指定，类似于windows下安装。
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 .sh
-以sh结尾的安装包，这种包类似于bin包，安装也比较简单 
+以sh结尾的安装包，这种包类似于bin包，安装也比较简单
 
  ==安装
-1、源代码压缩包所在的目录 
-2、给文件加上可执行属性：chmod +x ******.bin（中间是字母x，小写） 
-3、执行命令：./******.sh(realplayer for linux就是这样的安装包) 
-==卸载：把安装时中选择的安装目录删除就OK 
-===执行安装过程中可以指定，类似于windows下安装。 
+1、源代码压缩包所在的目录
+2、给文件加上可执行属性：chmod +x ******.bin（中间是字母x，小写）
+3、执行命令：./******.sh(realplayer for linux就是这样的安装包)
+==卸载：把安装时中选择的安装目录删除就OK
+===执行安装过程中可以指定，类似于windows下安装。
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-附：安装完软件后如何执行。 安装完软件后可以有好多种方法执行软件： 
-A、有些软件安装后会自动在应用程序列表里加上快捷键，和windows一样，到那里找就行了。 
-B、如果在应用程序列表里找不到的话，可以直接在/开始/运行命令里输入命令：启动命令一般就是软件名，如firefox，realplay，xmms等 
-C、也可以打开一个shell终端，输入软件名，和在“运行命令”里一样。如果不知道命令全程的话，可以输入开头的字母，然后按tab键查找，系统会自动显示以输入字母开头的所有命令/ 
-D、你也可以直接到安装目录下运行启动文件，linux下的可执行图标和shell终端图标很像 
-E、到/usr/bin目录里找安装的软件启动文件执行命令。linux系统把所有可执行的文件命令在/usr/bin目录里都作了启动连接，你可以去那个目录寻找你安装的文件的启动命令，双击启动 
+附：安装完软件后如何执行。 安装完软件后可以有好多种方法执行软件：
+A、有些软件安装后会自动在应用程序列表里加上快捷键，和windows一样，到那里找就行了。
+B、如果在应用程序列表里找不到的话，可以直接在/开始/运行命令里输入命令：启动命令一般就是软件名，如firefox，realplay，xmms等
+C、也可以打开一个shell终端，输入软件名，和在“运行命令”里一样。如果不知道命令全程的话，可以输入开头的字母，然后按tab键查找，系统会自动显示以输入字母开头的所有命令/
+D、你也可以直接到安装目录下运行启动文件，linux下的可执行图标和shell终端图标很像
+E、到/usr/bin目录里找安装的软件启动文件执行命令。linux系统把所有可执行的文件命令在/usr/bin目录里都作了启动连接，你可以去那个目录寻找你安装的文件的启动命令，双击启动
 
 
 
@@ -209,7 +212,7 @@ E、到/usr/bin目录里找安装的软件启动文件执行命令。linux系统
 -----------------------------------------------------------------------------------------------------------------------------------------
  Liux技巧总结之--解压各种文件
 
-.tar 
+.tar
 解包：tar xvf FileName.tar
 打包：tar cvf FileName.tar DirName
 （注：tar是打包，不是压缩！）
@@ -287,7 +290,7 @@ gunzip -d file
 
 sEx只是调用相关程序，本身并无压缩、解压功能，请注意！
 
-gzip 命令 
+gzip 命令
 减少文件大小有两个明显的好处，一是可以减少存储空间，二是通过网络传输文件时，可以减少传输的时间。gzip 是在 Linux 系统中经常使用的一个对文件进行压缩和解压缩的命令，既方便又好用。
 
 语法：gzip [选项] 压缩（解压缩）的文件名该命令的各选项含义如下：
@@ -295,4 +298,3 @@ gzip 命令
 -c 将输出写到标准输出上，并保留原有文件。-d 将压缩文件解压。-l 对每个压缩文件，显示下列字段：     压缩文件的大小；未压缩文件的大小；压缩比；未压缩文件的名字-r 递归式地查找指定目录并压缩其中的所有文件或者是解压缩。-t 测试，检查压缩文件是否完整。-v 对每一个压缩和解压的文件，显示文件名和压缩比。-num 用指定的数字 num 调整压缩的速度，-1 或 --fast 表示最快压缩方法（低压缩比），-9 或--best表示最慢压缩方法（高压缩比）。系统缺省值为 6。指令实例：
 
 gzip *% 把当前目录下的每个文件压缩成 .gz 文件。gzip -dv *% 把当前目录下每个压缩的文件解压，并列出详细的信息。gzip -l *% 详细显示例1中每个压缩的文件的信息，并不解压。gzip usr.tar% 压缩 tar 备份文件 usr.tar，此时压缩文件的扩展名为.tar.gz。
-
